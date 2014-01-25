@@ -1,0 +1,10 @@
+http://www.3dtextmaker.com/cgi-bin/3dtext.pl
+Sans Serif: Verdana;
+color: white ffffff;
+Size Standard Banner: 468*60 px;
+Effect: Slide Left;
+Speed: Medium;
+Font size: 12;
+Depth: 3;
+Frames: 12;
+Looping: Run Forever;

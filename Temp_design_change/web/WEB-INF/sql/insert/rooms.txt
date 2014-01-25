@@ -1,0 +1,61 @@
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(1, 101, 'lexury', 2000, 'garden');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(2, 102, 'lexury', 2000, 'garden');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(3, 103, 'lexury', 2200, 'marina');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(4, 104, 'lexury', 2200, 'marina');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(5, 201, 'khaleej', 5000, 'garden');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(6, 202, 'khaleej', 5000, 'garden');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(7, 203, 'khaleej', 5200, 'marina');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(8, 204, 'khaleej', 5200, 'marina');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(9, 301, 'royal', 9000, 'garden');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(10, 302, 'royal', 9000, 'garden');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(11, 303, 'royal', 9200, 'marina');
+
+INSERT INTO rooms
+(room_id, room_number, room_type, room_price, room_view)
+VALUES
+(12, 304, 'royal', 9200, 'marina');
+
+

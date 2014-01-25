@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/Attendee_Management_App._Using_Connection_Pooling">
+
+    <Resource name="jdbc/attendeesdb" auth="Container" maxActive="100" 
+    maxIdle="30" maxWait="1000" username="root" password="123" 
+    driverClassName="com.mysql.jdbc.Driver"
+    url="jdbc:mysql:///attendeesdb?autoReconnect=true" logAbandoned="true"
+    removeAbandoned="true" removeAbandonedTimeout="60" 
+    type="javax.sql.DataSource"/>
+    
+    <Resource name="att" type="com.me.model.Attendee" id="1" login="testing"
+    password="pass" />
+</Context>

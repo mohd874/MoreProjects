@@ -1,0 +1,28 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+
+
+<!-- Designed by Kenneth Barbour.
+If you use this design, please let me know at kenbarbour@gmail.com.
+                 The two bullets are from www.stylegala.com/features/bulletmadness
+The Original CSS code is by Anthony Yeung-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Online Car Service</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <link href="/Online_Car_Service/css/styles.css" rel="stylesheet" type="text/css" />
+        <%@ include file="resources.jspf" %>
+    </head>
+    <body>
+    <jsp:useBean scope="session" class="my.com.model.User" id="userBean" >
+        <jsp:setProperty name="userBean" property="name" value="Guest"/>
+        <jsp:setProperty name="userBean" property="type" value="user"/>
+        <jsp:setProperty name="userBean" property="id" value="-1"/>
+    </jsp:useBean>
+        <div id="container">
+            <div id="top">
+                <div id="title">Online Car Service</div>
+            </div>
+            <div id="middle">
+                <%@ include file="navi.jspf" %>

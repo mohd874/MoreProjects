@@ -1,0 +1,19 @@
+insert into services (service_no, service_type, service_desc )
+values
+(1, 'ironing', 'wash and iron all types of clothes') ;
+
+insert into services (service_no, service_type, service_desc )
+values
+(2, 'rooms cleaning', 'clean and prepare room in 15 minutes, available all the day') ;
+
+insert into services (service_no, service_type, service_desc )
+values
+(3, 'snack support', 'support rooms with several types of snacks and chocolates') ;
+
+insert into services (service_no, service_type, service_desc )
+values
+(4, 'beer support', 'offer the luxury types of french and dutch wines') ;
+
+insert into services (service_no, service_type, service_desc )
+values
+(5, 'occasions service', 'prepare and support rooms with services requirements') ;

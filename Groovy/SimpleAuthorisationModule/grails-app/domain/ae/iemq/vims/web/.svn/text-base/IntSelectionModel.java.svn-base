@@ -1,0 +1,52 @@
+package ae.iemq.vims.web;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.tapestry.form.IPropertySelectionModel;
+
+/**
+ * A property selection model for entities where each label is set to the result
+ * of a call the toString() method on each entity. 
+ *
+ * @param <T>
+ */
+public class IntSelectionModel implements
+		IPropertySelectionModel {
+
+	private int[] entities;
+
+	public IntSelectionModel(int[] entities) {
+		this.entities = entities;
+	}
+
+	public String getLabel(int index) {
+		return entities[index]+"";
+	}
+
+	public Object getOption(int index) {
+		if (entities==null)
+			return null;
+			
+		return entities[index];
+	}
+
+	public int getOptionCount() {
+		return entities.length;
+	}
+
+	public String getValue(int index) {
+		return Integer.toString(index);
+	}
+
+	public Object translateValue(String index) {
+		if (index == null || index.length() == 0)
+			return null;
+		
+		return getOption(Integer.parseInt(index));
+	}
+
+	public boolean isDisabled(int index) {
+		return false;
+	}
+}

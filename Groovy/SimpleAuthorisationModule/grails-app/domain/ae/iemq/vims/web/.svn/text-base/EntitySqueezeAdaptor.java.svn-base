@@ -1,0 +1,73 @@
+package ae.iemq.vims.web;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.tapestry.services.DataSqueezer;
+import org.apache.tapestry.util.io.SqueezeAdaptor;
+
+import ae.iemq.vims.domain.BaseEntity;
+import ae.iemq.vims.service.IEntityRetrievalService;
+
+/**
+ * Squeezes a persistent entity into a string format containg the entity types
+ * and ids which are later passed to the entity retrieval service for unsqueezing.  This
+ * results in a call to the JPA entityManager which should find the requested entity in the
+ * second level cache.
+ *
+ */
+public class EntitySqueezeAdaptor implements SqueezeAdaptor {
+
+	private static final String NEW = "new";
+
+	private static final String PREFIX = "C";
+
+	private IEntityRetrievalService ers;
+	
+	private static final Log logger = LogFactory
+			.getLog(EntitySqueezeAdaptor.class);
+
+	public void setEntityRetrievalService(IEntityRetrievalService ers) {
+		this.ers = ers;
+	}
+	
+	public Class getDataClass() {
+		return BaseEntity.class;
+	}
+
+	public String getPrefix() {
+		return PREFIX;
+	}
+
+	public String squeeze(DataSqueezer arg0, Object data) {
+		String name = data.getClass().getCanonicalName();
+		BaseEntity entity = (BaseEntity) data;
+		
+		assert entity != null;
+		
+		String squeezed = PREFIX + name + "-";
+		
+		return entity.getId() != null ? squeezed + entity.getId() : squeezed + NEW;
+	}
+
+	public Object unsqueeze(DataSqueezer dataSqueezer, String string) {
+		// Strip the prefix
+		string = string.substring(1);
+		String[] strings = string.split("\\-");
+		
+		try {
+			Class clazz = Class.forName(strings[0]);			
+			
+			if (strings[1].equals(NEW))
+				return clazz.newInstance();
+			
+			Integer id = new Integer(strings[1]);
+			BaseEntity entity = ers.getEntityById(clazz, id);
+			System.out.println("Unsqueezed "+entity);
+			return entity;
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+}

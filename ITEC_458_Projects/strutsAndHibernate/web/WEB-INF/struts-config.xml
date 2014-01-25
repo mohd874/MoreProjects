@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+   <data-sources />
+   <form-beans >
+      <form-bean name="bookListForm" type="de.laliluna.library.struts.form.BookListForm" />
+      <form-bean name="bookEditForm" type="de.laliluna.library.struts.form.BookEditForm" />
+      <form-bean name="customerListForm" type="de.laliluna.library.struts.form.CustomerListForm" />
+      <form-bean name="customerEditForm" type="de.laliluna.library.struts.form.CustomerEditForm" />
+
+
+   </form-beans>
+
+   <global-exceptions />
+   <global-forwards >
+      <forward
+         name="welcome"
+         path="/default.do"
+         redirect="true" />
+
+   </global-forwards>
+
+   <action-mappings >
+      <action forward="/jsp/index.jsp" path="/default" unknown="true" />
+      <action
+         attribute="bookListForm"
+         input="/jsp/bookList.jsp"
+         name="bookListForm"
+         path="/bookList"
+         scope="request"
+         type="de.laliluna.library.struts.action.BookListAction">
+         <forward name="showList" path="/jsp/bookList.jsp" />
+      </action>
+      <action
+         attribute="bookEditForm"
+         input="/jsp/bookEdit.jsp"
+         name="bookEditForm"
+         parameter="do"
+         path="/bookEdit"
+         scope="request"
+         type="de.laliluna.library.struts.action.BookEditAction">
+         <forward name="showBorrow" path="/jsp/borrowBook.jsp" />
+         <forward name="showEdit" path="/jsp/bookEdit.jsp" />
+         <forward
+            name="showList"
+            path="/bookList.do"
+            redirect="true" />
+         <forward name="showAdd" path="/jsp/bookAdd.jsp" />
+      </action>
+      <action
+         attribute="customerListForm"
+         input="/jsp/customerList.jsp"
+         name="customerListForm"
+         path="/customerList"
+         scope="request"
+         type="de.laliluna.library.struts.action.CustomerListAction"
+         validate="false">
+         <forward name="showCustomerList" path="/jsp/customerList.jsp" />
+      </action>
+      <action
+         attribute="customerEditForm"
+         input="/jsp/customerEdit.jsp"
+         name="customerEditForm"
+         parameter="do"
+         path="/customerEdit"
+         scope="request"
+         type="de.laliluna.library.struts.action.CustomerEditAction"
+         validate="false">
+         <forward
+            name="customerList"
+            path="/customerList.do"
+            redirect="true" />
+         <forward name="editCustomer" path="/jsp/customerEdit.jsp" />
+      </action>
+
+
+   </action-mappings>
+
+   <message-resources parameter="de.laliluna.library.struts.ApplicationResources" />
+</struts-config>
+

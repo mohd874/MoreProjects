@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/48/web/commonLayout
+END
+commonLayout.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/48/web/commonLayout/commonLayout.jsp
+END
+isLoginPage.jspf
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/26/web/commonLayout/isLoginPage.jspf
+END
+header.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/1/web/commonLayout/header.jsp
+END
+taglibs.jspf
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/7/web/commonLayout/taglibs.jspf
+END
+footer.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/1/web/commonLayout/footer.jsp
+END

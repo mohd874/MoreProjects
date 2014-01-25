@@ -1,0 +1,14 @@
+<%@ page pageEncoding="UTF-8" %>
+<div style="color:red;text-align: left; width: 200px;">
+    <c:forEach var="error" items="${errors}">
+        <li>
+            ${error}
+        </li>
+    </c:forEach>
+    <c:if test="${requestScope.msg != null}">
+        <li>
+            ${requestScope.msg}
+        </li>
+    </c:if>
+</div>
+<br/>

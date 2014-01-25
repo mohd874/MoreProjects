@@ -1,0 +1,553 @@
+/*
+ * Copyright (c) IeMQ.
+ * All rights reserved.
+ */
+package ae.iemq.vims.resource.fusionCharts;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+import org.apache.log4j.Logger;
+
+import ae.iemq.vims.domain.Period;
+import ae.iemq.vims.domain.balancedScorecard.Measure;
+import ae.iemq.vims.domain.balancedScorecard.MeasurePeriod;
+import ae.iemq.vims.resource.VimsEntityLogger;
+import ae.iemq.vims.util.DateUtil;
+
+/**
+ * This class constructs an XML string used to populate Fusion Charts.
+ */
+public class MeasureCharts {
+
+	private static String IS_FORECAST = "isForecast";
+
+	private static String FORECAST_MONTH = "forecastMonth";
+
+	/** The internal logger. */
+	static Logger LOG = Logger.getLogger(MeasureCharts.class);
+
+	/**
+	 * Constructor for MeasureCharts.
+	 */
+	public MeasureCharts() {
+		super();
+	}
+
+	/**
+	 * This Method constructs the XML for building an Annual Measure Column
+	 * Chart.
+	 * 
+	 * @return Sting The XML input to construct the guage.
+	 */
+
+	public static String generateMeasureAnnualMulti2DColumnChart(Measure measure) {
+
+		Set<MeasurePeriod> measurePeriods = measure.getPeriods();
+		LOG.debug("MEASURE PERIODS SIZE FOR MEASURE IS------->>>>>>"
+				+ measurePeriods.size());
+		LOG.debug("MEASURE FREQUENCY IS------->>>>>>" + measure.getFrequency());
+		for (MeasurePeriod mp : measurePeriods) {
+			if (mp == null)
+				LOG.debug("MEASURE PERIOD IS NULLLLLLLLLLLL!");
+			else
+				LOG.debug("MEASURE PERIOD IS---->" + mp.getYear());
+		}
+		TreeMap<Integer, MeasurePeriod> treeMap = new TreeMap<Integer, MeasurePeriod>();
+
+		for (MeasurePeriod mp : measurePeriods) {
+			if (mp == null)
+				LOG.debug("MEASURE PERIOD IS NULLLLLLLLLLLL!");
+			treeMap.put(mp.getYear(), mp);
+		}
+		TreeMap<Integer, MeasurePeriod> forecastTreeMap = null;
+
+		StringBuffer sb = new StringBuffer();
+
+		sb
+				.append("<chart palette='2' caption='Annual Actual vs. Target' shownames='1' showvalues='0' decimals='0' useRoundEdges='1' legendBorderAlpha='0'>");
+
+		if (measure.getPeriods() != null) {
+
+			sb.append("<categories>");
+
+			int noPeriods = measurePeriods.size();
+			double[][] actualPoints = new double[noPeriods][2];
+			double[][] targetPoints = new double[noPeriods][2];
+			int count = 0;
+			int maxYear = 0;
+			for (Integer year : treeMap.keySet()) {
+				sb.append("<category label='" + year + "'/>");
+				actualPoints[count][0] = treeMap.get(year).getYear();
+				actualPoints[count][1] = treeMap.get(year).getActualYtdTotal();
+				LOG.debug("Setting actualPoints for Forecasting!!!!!");
+				targetPoints[count][0] = treeMap.get(year).getYear();
+				targetPoints[count][1] = treeMap.get(year).getTargetYtdTotal();
+				LOG.debug("Setting targetPoints for Forecasting!!!!!");
+				maxYear = year;
+				count++;
+			}
+			// MeasurePeriod forcastPeriod = null;
+			if (count > 1) {
+				sb
+						.append("<vLine color='FF5904' thickness='2' dashed='1'  dashGap='3'/>");
+				double[] actualCoeffs = org.jfree.data.statistics.Regression
+						.getOLSRegression(actualPoints);
+				double[] targetCoeffs = org.jfree.data.statistics.Regression
+						.getOLSRegression(targetPoints);
+				forecastTreeMap = new TreeMap<Integer, MeasurePeriod>();
+
+				for (int i = 0; i < 2; i++) {
+
+					++maxYear;
+					double actualVal = (maxYear) * actualCoeffs[1]
+							+ actualCoeffs[0];
+					double targetVal = (maxYear) * targetCoeffs[1]
+							+ targetCoeffs[0];
+					MeasurePeriod forcastPeriod = new MeasurePeriod();
+					// WARNING !! possible loss of precision with typecasting
+					forcastPeriod.setActualYtdTotal((float) actualVal);
+					forcastPeriod.setTargetYtdTotal((float) targetVal);
+					forcastPeriod.setMeasure(measure);
+					forcastPeriod.setYear(maxYear);
+					forecastTreeMap.put(maxYear, forcastPeriod);
+					sb.append("<category label='" + maxYear + "'/>");
+				}
+			}
+			sb.append("</categories>");
+
+			sb
+					.append("<dataset seriesName='Actual' color='AFD8F8' showValues='0'>");
+			for (MeasurePeriod mp : treeMap.values()) {
+				sb.append("<set value='" + mp.getActualYtdTotal() + "'/>");
+			}
+			if (forecastTreeMap != null) {
+				for (MeasurePeriod mp : forecastTreeMap.values()) {
+					sb.append("<set value='" + mp.getForcedActualYtdTotal()
+							+ "' alpha='50'/>");
+				}
+			} else
+				LOG.debug("------>> forecastTreeMap is NULL <<-------------");
+			sb.append("</dataset>");
+
+			sb
+					.append("<dataset seriesName='Target' color='F6BD0F' showValues='0'>");
+			for (MeasurePeriod mp : treeMap.values()) {
+				sb.append("<set value='" + mp.getTargetYtdTotal() + "'/>");
+			}
+			if (forecastTreeMap != null) {
+				for (MeasurePeriod mp : forecastTreeMap.values()) {
+					sb.append("<set value='" + mp.getForcedTargetYtdTotal()
+							+ "' alpha='50'/>");
+				}
+			} else
+				LOG.debug("------>> forecastTreeMap is NULL <<-------------");
+			sb.append("</dataset>");
+		}
+
+		sb.append("</chart>");
+		String xmlString = sb.toString();
+
+		if (LOG.isDebugEnabled()) {
+			LOG.debug(xmlString);
+		}
+
+		return xmlString;
+
+	}
+	
+	public static String generateMeasureLineByPeriod(Measure measure) {
+
+		Set<MeasurePeriod> measurePeriods = measure.getPeriods();
+		Set<MeasurePeriod> copyMeasurePeriods = new HashSet<MeasurePeriod>();
+		
+		for (MeasurePeriod o : measurePeriods) {
+			copyMeasurePeriods.add((MeasurePeriod) o.clone());
+		}
+
+		String frequency = measure.getFrequency();
+		StringBuffer sb = new StringBuffer();
+		StringBuffer dataset=new StringBuffer();
+		float maxValue=5;
+		float minValue=0;
+		if (copyMeasurePeriods != null) {
+			maxValue=-Float.MAX_VALUE;
+			minValue=Float.MAX_VALUE;
+			int year = Calendar.getInstance().get(Calendar.YEAR);
+			for (MeasurePeriod o : copyMeasurePeriods) {
+
+				boolean isCurrentYear = false;
+				int forecastMonth = 13; // Calendar months go from 0-11
+				if (year == o.getYear()) {
+					isCurrentYear = true;
+					forecastMonth = ((Integer) forecastMeasurePeriod(o).get(
+							FORECAST_MONTH)).intValue();
+				}
+				boolean isDashed = false;
+				dataset.append("<dataset seriesName='" + o.getYear() + "'>");
+				Map<Integer, Float> dataMap = o.getActualDataMap(frequency);
+				Iterator entSet = dataMap.entrySet().iterator();
+				while (entSet.hasNext()) {
+					Map.Entry entry = (Map.Entry) entSet.next();
+					Float value = (Float) entry.getValue();
+					dataset.append("<set value='" + value + "'");
+					if (maxValue<value)maxValue=value;
+					if (minValue>value)minValue=value;
+					if (isDashed
+							|| (isCurrentYear && forecastMonth == ((Integer) entry
+									.getKey()).intValue())) {
+						isDashed = true;
+						dataset.append(" dashed='1' ");
+					}
+					dataset.append("/>");
+				}
+				dataset.append("</dataset>");
+			}
+
+			dataset.append("<styles>");
+
+			dataset.append("<definition>");
+			dataset.append("<style name='CaptionFont' type='font' size='12'/>");
+			dataset.append("</definition>");
+
+			dataset.append("<application>");
+			dataset.append("<apply toObject='CAPTION' styles='CaptionFont'/>");
+			dataset.append("</application>");
+
+			dataset.append("</styles>");
+			
+		}
+		//Scaling Max and min  values for yAXIS
+		double diff=Math.round(maxValue-minValue);
+		LOG.debug("CHART MAX-VALUE IS--------------->"+maxValue);
+		LOG.debug("CHART MIN-VALUE IS--------------->"+minValue);
+		
+		double max=Math.round(maxValue+Math.abs(diff*0.15));
+		max-=max%5;
+		double min=Math.round(minValue-Math.abs(diff*0.15));
+		min-=min%5;
+		if (diff==0 && maxValue<=5){
+			max=10;
+		}else if (diff==0 && minValue>5) {
+			max=(Math.round(maxValue)+5)-((Math.round(maxValue)+5)%5);
+			min=(Math.round(minValue)-5)-((Math.round(minValue)-5)%5);
+		}
+		if(min<0 && minValue>=0)min=0;
+		LOG.debug("CHART MAX IS--------------->"+max);
+		LOG.debug("CHART MIN IS--------------->"+min);
+		//END Scaling Max and min  values for yAXIS
+		
+		sb
+				.append("<chart caption='Annual Measure Periods' xAxisName='Month' " +
+						"yAxisMaxValue='"+max+"' yAxisMinValue='"+min+"' " +
+								"yAxisName='Actual' showValues='0' subCaption='forecast plot - - - -'>");
+
+		sb.append(FusionChartElementUtil
+				.getMonthlyCategoriesByPeriodFrequency(frequency));
+
+		sb.append(dataset.toString());
+
+		sb.append("</chart>");
+		String xmlString = sb.toString();
+
+		if (LOG.isDebugEnabled()) {
+			LOG.debug(xmlString);
+		}
+
+		return xmlString;
+
+	}
+
+	private static HashMap forecastMeasurePeriod(final MeasurePeriod mp) {
+
+		TreeMap<Integer, Float> actualTreeMap = new TreeMap<Integer, Float>();
+		TreeMap<Integer, Float> forecastTreeMap = new TreeMap<Integer, Float>();
+		int currentMonth = DateUtil.currentMonthInt();
+		HashMap<String, Boolean> isForecast = new HashMap<String, Boolean>();
+		isForecast.put(IS_FORECAST, false);
+		HashMap<String, Integer> forecastMonth = new HashMap<String, Integer>();
+		forecastMonth.put(FORECAST_MONTH, new Integer(13));
+
+		String measureFrequency = mp.getMeasure().getFrequency();
+		if (measureFrequency.equalsIgnoreCase(Period.MONTHLY)) {
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(0), actualTreeMap,
+					forecastTreeMap, Calendar.JANUARY, currentMonth,
+					isForecast, forecastMonth);
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(1), actualTreeMap,
+					forecastTreeMap, Calendar.FEBRUARY, currentMonth,
+					isForecast, forecastMonth);
+		}
+		if (measureFrequency.equalsIgnoreCase(Period.MONTHLY)
+				|| measureFrequency.equalsIgnoreCase(Period.QUARTERLY)) {
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(2), actualTreeMap,
+					forecastTreeMap, Calendar.MARCH, currentMonth, isForecast,
+					forecastMonth);
+		}
+		if (measureFrequency.equalsIgnoreCase(Period.MONTHLY)) {
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(3), actualTreeMap,
+					forecastTreeMap, Calendar.APRIL, currentMonth, isForecast,
+					forecastMonth);
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(4), actualTreeMap,
+					forecastTreeMap, Calendar.MAY, currentMonth, isForecast,
+					forecastMonth);
+		}
+		if (!measureFrequency.equalsIgnoreCase(Period.YEARLY)) {
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(5), actualTreeMap,
+					forecastTreeMap, Calendar.JUNE, currentMonth, isForecast,
+					forecastMonth);
+		}
+		if (measureFrequency.equalsIgnoreCase(Period.MONTHLY)) {
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(6), actualTreeMap,
+					forecastTreeMap, Calendar.JULY, currentMonth, isForecast,
+					forecastMonth);
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(7), actualTreeMap,
+					forecastTreeMap, Calendar.AUGUST, currentMonth, isForecast,
+					forecastMonth);
+		}
+		if (measureFrequency.equalsIgnoreCase(Period.MONTHLY)
+				|| measureFrequency.equalsIgnoreCase(Period.QUARTERLY)) {
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(8), actualTreeMap,
+					forecastTreeMap, Calendar.SEPTEMBER, currentMonth,
+					isForecast, forecastMonth);
+		}
+		if (measureFrequency.equalsIgnoreCase(Period.MONTHLY)) {
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(9), actualTreeMap,
+					forecastTreeMap, Calendar.OCTOBER, currentMonth,
+					isForecast, forecastMonth);
+			forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(10), actualTreeMap,
+					forecastTreeMap, Calendar.NOVEMBER, currentMonth,
+					isForecast, forecastMonth);
+		}
+		forecastMeasurePeriodHelper(mp.getActualMonthlyFigure(11), actualTreeMap,
+				forecastTreeMap, Calendar.DECEMBER, currentMonth, isForecast,
+				forecastMonth);
+
+		int actualCount = 0;
+		double[][] actualPoints = new double[actualTreeMap.size()][2];
+		Iterator actualEntrySet = actualTreeMap.entrySet().iterator();
+		while (actualEntrySet.hasNext()) {
+			Map.Entry entry = (Map.Entry) actualEntrySet.next();
+			LOG.debug("actual entry set key -->" + (Integer) entry.getKey());
+			LOG.debug("actual entry set value -->" + (Float) entry.getValue());
+			actualPoints[actualCount][0] = (Integer) entry.getKey();
+			actualPoints[actualCount][1] = (Float) entry.getValue();
+			LOG.debug("Setting actualPoints for Forecasting!!!!!");
+			actualCount++;
+		}
+		LOG.debug("actualCount -->" + actualCount);
+		// MeasurePeriod forcastPeriod = null;
+		if (actualCount == 1) {
+//			double[] noRegDblArr = { actualPoints[0][1] };
+//			populateForecastDataOnMeasurePeriodHelper(mp, actualCount,
+//					noRegDblArr, true);
+		} else if (actualCount > 1) {
+			LOG.debug("actualCount > 1");
+			double[] actualCoeffs = org.jfree.data.statistics.Regression
+					.getOLSRegression(actualPoints);
+			populateForecastDataOnMeasurePeriodHelper(mp, actualCount,
+					actualCoeffs, false);
+		}
+
+		VimsEntityLogger.displayClass(mp);
+
+		return forecastMonth;
+	}
+
+	private static void forecastMeasurePeriodHelper(BigDecimal actualValueForMonth,
+			TreeMap<Integer, Float> actualTreeMap,
+			TreeMap<Integer, Float> forecastTreeMap, int measureMonth,
+			int currentMonth, HashMap<String, Boolean> isForecast,
+			HashMap<String, Integer> forecastMonth) {
+
+		boolean thisIsForecast = isForecast.get(IS_FORECAST);
+		float valueAsFloat = 0f;
+		if (actualValueForMonth != null) {
+			valueAsFloat = actualValueForMonth.floatValue();
+		}
+		if ((measureMonth == currentMonth) || (thisIsForecast)) {
+			LOG.debug("measureMonth == currentMonth) || (isForecast)");
+			if ((measureMonth == currentMonth && valueAsFloat == 0)) {
+				LOG.debug("forecast month");
+				forecastMonth
+						.put(FORECAST_MONTH, Integer.valueOf(currentMonth - 1));
+				forecastTreeMap.put(measureMonth, new Float(0));
+			} else if (thisIsForecast) {
+				LOG.debug("month in future of forecast month");
+				forecastTreeMap.put(measureMonth, new Float(0));
+			} else {
+				LOG.debug("value already exists for current month");
+				forecastMonth
+						.put(FORECAST_MONTH, Integer.valueOf(currentMonth));
+				actualTreeMap.put(measureMonth, valueAsFloat);
+			}
+			isForecast.put(IS_FORECAST, true);
+		} else if ((measureMonth > currentMonth) && (!thisIsForecast)){
+			LOG.debug("Not a monthly measure but a forecast period");
+			
+			Integer lastForecast = new Integer(0);
+			Iterator forecastEntrySet = actualTreeMap.entrySet().iterator();
+			while (forecastEntrySet.hasNext()) {
+				Map.Entry entry = (Map.Entry) forecastEntrySet.next();
+				lastForecast = (Integer) entry.getKey();
+			}
+			if (measureMonth > lastForecast.intValue()) {
+				forecastMonth
+				.put(FORECAST_MONTH, Integer.valueOf(measureMonth - (measureMonth - lastForecast.intValue())));
+			}			
+			forecastTreeMap.put(measureMonth, new Float(0));
+		} else {
+			LOG
+					.debug("} else {   actualTreeMap.put(measureMonth, valueAsFloat);");
+			actualTreeMap.put(measureMonth, valueAsFloat);
+		}
+		LOG.debug("forecastMeasurePeriodHelper end - forecastMonth -->"
+				+ forecastMonth);
+	}
+
+	private static void populateForecastDataOnMeasurePeriodHelper(
+			MeasurePeriod mp, int actualCount, double[] actualCoeffs,
+			boolean isSingleSeries) {
+
+		LOG.debug("populateForecastDataOnMeasurePeriodHelper");
+		double actualVal = actualCoeffs[0];
+		for (int i = 0; i < 12; i++) {
+
+			if (!isSingleSeries) {
+				actualVal = (actualCount) * actualCoeffs[1] + actualCoeffs[0];
+			}
+
+			LOG.debug("actualVal -->" + actualVal + "<-- for iteration " + i
+					+ " for int/month " + actualCount);
+
+			switch (actualCount) {
+
+			case Calendar.JANUARY:
+				mp.setActualMonthlyFigure(Calendar.JANUARY, new BigDecimal(actualVal));
+				break;
+			case Calendar.FEBRUARY:
+				mp.setActualMonthlyFigure(Calendar.FEBRUARY, new BigDecimal(actualVal));
+				break;
+			case Calendar.MARCH:
+				mp.setActualMonthlyFigure(Calendar.MARCH, new BigDecimal(actualVal));
+				break;
+			case Calendar.APRIL:
+				mp.setActualMonthlyFigure(Calendar.APRIL, new BigDecimal(actualVal));
+				break;
+			case Calendar.MAY:
+				mp.setActualMonthlyFigure(Calendar.MAY, new BigDecimal(actualVal));
+				break;
+			case Calendar.JUNE:
+				mp.setActualMonthlyFigure(Calendar.JUNE, new BigDecimal(actualVal));
+				break;
+			case Calendar.JULY:
+				mp.setActualMonthlyFigure(Calendar.JULY, new BigDecimal(actualVal));
+				break;
+			case Calendar.AUGUST:
+				mp.setActualMonthlyFigure(Calendar.AUGUST, new BigDecimal(actualVal));
+				break;
+			case Calendar.SEPTEMBER:
+				mp.setActualMonthlyFigure(Calendar.SEPTEMBER, new BigDecimal(actualVal));
+				break;
+			case Calendar.OCTOBER:
+				mp.setActualMonthlyFigure(Calendar.OCTOBER, new BigDecimal(actualVal));
+				break;
+			case Calendar.NOVEMBER:
+				mp.setActualMonthlyFigure(Calendar.NOVEMBER, new BigDecimal(actualVal));
+				break;
+			case Calendar.DECEMBER:
+				mp.setActualMonthlyFigure(Calendar.DECEMBER, new BigDecimal(actualVal));
+				break;
+			}
+			++actualCount;
+		}
+	}
+	
+	/**
+	 * Each Array Item represents a row from a resultset. A row contains the name of the group series 
+	 * (names representa a dataset series name) and
+	 * the corresponding values for every period (periods are represented by categories)
+	 * @param additionalInfo
+	 * @return
+	 */
+	public static String generateAdditionalDataStackedChart(ArrayList<String[]>additionalInfo) {
+
+		TreeMap<Integer, ArrayList<Float>> treeMap = new TreeMap<Integer, ArrayList<Float>>();
+		ArrayList<String> names=new ArrayList<String>() ;
+		int totalPeriods=0;
+		for (String [] row : additionalInfo) {
+			if(row!=null){
+				int aux=row.length;
+				if (aux>totalPeriods)totalPeriods=aux;
+			}
+		}
+		//if (totalPeriods >0)totalPeriods--;
+		for (String [] row : additionalInfo) {
+			LOG.debug("TO PROCESS-->"+row.toString()+" size="+row.length);
+			if(row!=null&&row.length>0){
+				for (int i=0;i<totalPeriods;i++){
+					if (i==0){
+						names.add(row[i]);
+						LOG.debug("Processed Name-->"+row[i]);
+					}
+					else if (treeMap.get(i)==null){
+						LOG.debug("Processed new Array-->"+row[i]);
+						ArrayList<Float> arrList=new ArrayList<Float>();
+						arrList.add(Float.valueOf(row[i]));
+						treeMap.put(i,arrList);
+					}else{
+						LOG.debug("Processed add Array-->"+row[i]);
+						treeMap.get(i).add(Float.valueOf(row[i]));
+					}
+					//LOG.debug("Processed-->"+row[i]);
+				}
+				
+			}
+			
+		}
+		
+		StringBuffer sb = new StringBuffer();
+
+		sb.append("<chart palette='2' caption='Extended Data' shownames='1' showvalues='0' xAxisName='Period' yAxisName='Value' useRoundEdges='1' legendBorderAlpha='0'>");
+
+		if (treeMap.size()>0) {
+
+			sb.append("<categories>");
+			for (Integer period : treeMap.keySet()) {
+				sb.append("<category label='" + period + "'/>");
+
+			}
+			sb.append("</categories>");
+		}
+		if (names!=null&&names.size()>0){
+			//int count=1;
+			for (String series: names){
+				sb
+				.append("<dataset seriesName='"+series+"' >");
+				for(Integer period:treeMap.keySet()){
+					sb.append("<set value='" +treeMap.get(period).get(names.indexOf(series))+ "'/>");
+				}
+				sb.append("</dataset>");
+				//count++;
+			}
+		}
+		sb.append("</chart>");
+		String xmlString = sb.toString();
+
+		if (LOG.isDebugEnabled()) {
+			LOG.debug(xmlString);
+		}
+
+		return xmlString;
+
+	}
+	
+	
+	
+}

@@ -1,0 +1,33 @@
+insert into services (employee_id, job_title, marital_status, gender, years_of_exp, service_no)
+values
+(7, 'Receptionest', 'single', 'male', '5') ;
+
+insert into services (employee_id, job_title, marital_status, gender, years_of_exp, service_no)
+values
+(8, 'Receptionest', 'single', 'female', '3') ;
+
+insert into services (employee_id, job_title, marital_status, gender, years_of_exp, service_no)
+values
+(9, 'Cleaner', 'married', 'male', '10',2) ;
+
+insert into services (employee_id, job_title, marital_status, gender, years_of_exp, service_no)
+values
+(10,'beer supporter', 'married', 'male', '7',4) ;
+
+insert into services (employee_id, job_title, marital_status, gender, years_of_exp, service_no)
+values
+(11, 'snack supporter', 'single', 'male', '6',3) ;
+
+insert into services (employee_id, job_title, marital_status, gender, years_of_exp, service_no)
+values
+(12, 'ironer', 'single', 'male', '7',1) ;
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/45/src/java/ae/hct/admc/util
+END
+HibernateUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/27/src/java/ae/hct/admc/util/HibernateUtil.java
+END
+MailUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/42/src/java/ae/hct/admc/util/MailUtil.java
+END
+RoomSchedulingSystemUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/45/src/java/ae/hct/admc/util/RoomSchedulingSystemUtil.java
+END
+AppListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/27/src/java/ae/hct/admc/util/AppListener.java
+END
+DateTimeUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/43/src/java/ae/hct/admc/util/DateTimeUtil.java
+END

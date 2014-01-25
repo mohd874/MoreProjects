@@ -1,0 +1,5 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ include file="footer.jspf" %>
+</div>
+</body>
+</html>

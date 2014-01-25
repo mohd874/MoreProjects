@@ -1,0 +1,130 @@
+package ae.iemq.vims.resource;
+
+import java.awt.Color;
+import java.awt.GradientPaint;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.CategoryDataset;
+
+public class JFreeCharts {
+
+	public  JFreeChart createTwoCategoryBarChart(String title,String category,String value,CategoryDataset dataset) {
+        
+        // create the chart...
+        JFreeChart chart = ChartFactory.createBarChart(
+        	title,             // chart title
+            category,               // domain axis label
+            value,                  // range axis label
+            dataset,                  // data
+            PlotOrientation.VERTICAL, // orientation
+            true,                     // include legend
+            true,                     // tooltips?
+            false                     // URLs?
+        );
+
+        // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
+
+        // set the background color for the chart...
+        chart.setBackgroundPaint(Color.white);
+
+        // get a reference to the plot for further customisation...
+        CategoryPlot plot = chart.getCategoryPlot();
+        plot.setBackgroundPaint(Color.lightGray);
+        plot.setDomainGridlinePaint(Color.white);
+        plot.setDomainGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.white);
+
+        // set the range axis to display integers only...
+        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        
+        // disable bar outlines...
+        BarRenderer renderer = (BarRenderer) plot.getRenderer();
+        renderer.setDrawBarOutline(false);
+        
+        // set up gradient paints for series...
+        GradientPaint gp0 = new GradientPaint(
+            0.0f, 0.0f, Color.blue, 
+            0.0f, 0.0f, new Color(0, 0, 64)
+        );
+        GradientPaint gp1 = new GradientPaint(
+            0.0f, 0.0f, Color.green, 
+            0.0f, 0.0f, new Color(0, 64, 0)
+        );
+      
+        renderer.setSeriesPaint(0, gp0);
+        renderer.setSeriesPaint(1, gp1);
+    
+
+        CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setLowerMargin(0.01d); // percentage of space before first bar
+        domainAxis.setUpperMargin(0.01d); // percentage of space after last bar
+        domainAxis.setCategoryMargin(0.33d); // percentage of space between categories
+       
+      
+        domainAxis.setCategoryLabelPositions(
+            CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0)
+        );
+        // OPTIONAL CUSTOMISATION COMPLETED.
+        
+        return chart;
+        
+    }
+	
+public JFreeChart createAreaChart(String title,String category,String value,CategoryDataset dataset) {
+        
+        final JFreeChart chart = ChartFactory.createAreaChart(
+            title,             // chart title
+            category,               // domain axis label
+            value,                  // range axis label
+            dataset,                  // data
+            PlotOrientation.VERTICAL, // orientation
+            true,                     // include legend
+            true,                     // tooltips
+            false                     // urls
+        );
+ 
+        // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
+
+        // set the background color for the chart...
+//        final StandardLegend legend = (StandardLegend) chart.getLegend();
+  //      legend.setAnchor(StandardLegend.SOUTH);
+
+        chart.setBackgroundPaint(Color.white);
+       
+        
+        final CategoryPlot plot = chart.getCategoryPlot();
+        plot.setForegroundAlpha(0.5f);
+        
+  //      plot.setAxisOffset(new Spacer(Spacer.ABSOLUTE, 5.0, 5.0, 5.0, 5.0));
+        plot.setBackgroundPaint(Color.lightGray);
+        plot.setDomainGridlinesVisible(true);
+        plot.setDomainGridlinePaint(Color.white);
+        plot.setRangeGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.white);
+        
+        final CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
+        domainAxis.setLowerMargin(0.0);
+        domainAxis.setUpperMargin(0.0);
+        domainAxis.addCategoryLabelToolTip("Type 1", "The first type.");
+        domainAxis.addCategoryLabelToolTip("Type 2", "The second type.");
+        domainAxis.addCategoryLabelToolTip("Type 3", "The third type.");
+        
+        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        rangeAxis.setLabelAngle(0 * Math.PI / 2.0);
+        // OPTIONAL CUSTOMISATION COMPLETED.
+        
+        return chart;
+        
+    }
+}

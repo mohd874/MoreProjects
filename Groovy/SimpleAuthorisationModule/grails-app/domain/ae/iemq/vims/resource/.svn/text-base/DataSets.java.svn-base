@@ -1,0 +1,12 @@
+package ae.iemq.vims.resource;
+
+import java.util.List;
+
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+import ae.iemq.vims.domain.Project;
+
+public class DataSets {
+
+}

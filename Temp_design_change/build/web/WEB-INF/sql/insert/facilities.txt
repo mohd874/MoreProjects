@@ -1,0 +1,7 @@
+INSERT INTO `facilities` VALUES (1,'Swimming Pool','');
+INSERT INTO `facilities` VALUES (2,'Meeting Room','');
+INSERT INTO `facilities` VALUES (3,'Conference Hall','');
+INSERT INTO `facilities` VALUES (4,'Al Fager Rest.','');
+INSERT INTO `facilities` VALUES (5,'La Mento Rest.','');
+INSERT INTO `facilities` VALUES (6,'Royal Ball Room','');
+INSERT INTO `facilities` VALUES (7,'Parties Hall','');

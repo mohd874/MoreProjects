@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/53/src/java
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/8/src/java/log4j.properties
+END
+hibernate.cfg.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/42/src/java/hibernate.cfg.xml
+END

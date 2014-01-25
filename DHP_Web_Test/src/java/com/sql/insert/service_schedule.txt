@@ -1,0 +1,25 @@
+INSERT INTO service_schedule
+(order_id, date, time, description, job_done, reservation_id, employee_id, service_no)
+VALUES
+(1, '2006-11-13', '12:00', 'make it good i want to see what the best hotel may do', 'done: yes', 1, 7, 2);
+
+INSERT INTO service_schedule
+(order_id, date, time, description, job_done, reservation_id, employee_id, service_no)
+VALUES
+(2, '2006-11-5', '11:00', ' wash it by steam only', 'done: yes', 3, 9, 1);
+
+INSERT INTO service_schedule
+(order_id, date, time, description, job_done, reservation_id, employee_id, service_no)
+VALUES
+(3, '2006-10-4', '06:30', 'please clean it when we are out of the hotel', 'done: yes', 5, 10, 2);
+
+INSERT INTO service_schedule
+(order_id, date, time, description, job_done, reservation_id, employee_id, service_no)
+VALUES
+(4, '2006-5-11', '17:30', 'i want it to be clean before 6:00 pm', 'done: yes', 2, 10, 2);
+
+INSERT INTO service_schedule
+(order_id, date, time, description, job_done, reservation_id, employee_id, service_no)
+VALUES
+(5, '2006-11-6', '20:00', 'bring any popular chocolates in the room', 'done: yes', 4, 8, 3);
+

@@ -1,0 +1,29 @@
+body,td,th{
+    font-family: Garamond;
+    color:#000000;
+}
+
+#header{
+    color: #FFFFFF;
+    background-color: #0879CE;
+    font-weight: bold;
+    font-family: Garamond;
+    font-size: 48px;
+}
+
+fieldset{
+    border:2px solid #0879CE;
+    color:#0879CE;
+    font-family: Garamond;
+}
+
+legend{
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+a{
+    text-decoration:none;
+}
+
+

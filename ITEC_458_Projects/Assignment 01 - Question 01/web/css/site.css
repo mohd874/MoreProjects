@@ -1,0 +1,49 @@
+body, td, th{
+    font-family: Arial;
+    color:#000000;
+}
+
+#header {
+    color: #FFFFFF;
+    background-color: #0879CE;
+    font-weight: bold;
+    font-family: Arial;
+    font-size: 48px;
+}
+#questionTable {
+    width: 60%;
+    vertical-align: middle;
+}
+#answerTable {
+    width: 97%;
+}
+.centerAlign{
+    text-align: center;
+}
+#tableHeader {
+    color: #FFFFFF;
+    background-color: #7B0000;
+    font-weight: bold;
+    font-family: Arial;
+    font-size: 18px;
+    width: 25%;
+    vertical-align: middle;
+    font-family: Arial;
+}
+.true{
+    background-color: #dbcfcf;
+    font-family: Arial;
+}
+.false{
+    background-color: #dedddd;
+    font-family: Arial;
+}
+fieldset{
+    border:2px solid #0879CE;
+    color:#0879CE;
+    font-family: Arial;
+}
+legend{
+    margin-left: 10px;
+    vertical-align: middle;
+}

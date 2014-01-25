@@ -1,0 +1,19 @@
+insert into shops (shop_no, shop_name, shop_pic, desc , url)
+values
+(1, 'Chocola', '','sell luxury belgium chocolates','') ;
+
+insert into shops (shop_no, shop_name, shop_pic, desc , url)
+values
+(2, 'damas jwelery', '','the beauty from here','') ;
+
+insert into shops (shop_no, shop_name, shop_pic, desc , url)
+values
+(3, 'Paris Gallery', '','sell global types of parfumes, make ups','') ;
+
+insert into shops (shop_no, shop_name, shop_pic, desc , url)
+values
+(4, 'book shop', '','offer global magazines and newspapers','') ;
+
+insert into shops (shop_no, shop_name, shop_pic, desc , url)
+values
+(5, 'latansa', '','5 stars suits and occasional clothes for men and women','') ;

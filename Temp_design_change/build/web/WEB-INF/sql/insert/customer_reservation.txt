@@ -1,0 +1,25 @@
+INSERT INTO customer_reservation
+(reservation_id, arrival_date, depart_date, flight_number, confirmation, note, credit_card_no, credit_card_type, credit_card_exp_month, credit_card_exp_year, customer_id, room_id)
+VALUES
+(1, '2006-11-12', '2006-11-15', 'gf123', 'y', 'dont like the wine', 6549858574692938, 'master card', 06, 2006, 1, 4);
+
+INSERT INTO customer_reservation
+(reservation_id, arrival_date, depart_date, flight_number, confirmation, note, credit_card_no, credit_card_type, credit_card_exp_month, credit_card_exp_year, customer_id, room_id)
+VALUES
+(2, '2006-5-10', '2006-5-12', '131', 'n', 'i like my room to be clean every time', 6549873216545487, 'visa card', 03, 2006, 2, 1);
+
+INSERT INTO customer_reservation
+(reservation_id, arrival_date, depart_date, flight_number, confirmation, note, credit_card_no,credit_card_type, credit_card_exp_month, credit_card_exp_year,  customer_id, room_id)
+VALUES
+(3, '2006-11-5', '2006-11-7', 'gf333', 'y', 'dont like the wine', 5826523698572879, 'master card', 02, 2006, 3, 3);
+
+INSERT INTO customer_reservation
+(reservation_id, arrival_date, depart_date, flight_number, confirmation, note, credit_card_no, credit_card_type, credit_card_exp_month, credit_card_exp_year, customer_id, room_id)
+VALUES
+(4, '2006-11-5', '2006-11-7', 'gf333', 'y', 'dont like the wine', 9513578526415098, 'master card', 04, 2006, 3, 2);
+
+INSERT INTO customer_reservation
+(reservation_id, arrival_date, depart_date, flight_number, confirmation, note, credit_card_no, credit_card_type, credit_card_exp_month, credit_card_exp_year, customer_id, room_id)
+VALUES
+(5, '2006-10-1', '2006-10-5', 'br555', 'n', 'dont like the wine', 9871237539512645, 'visa card', 03, 2006, 4, 3);
+

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<map version="0.99b" orientation="orthogonal" width="10" height="10" tilewidth="35" tileheight="35">
+ <tileset name="grass" firstgid="1" tilewidth="35" tileheight="35">
+  <image source="../../../java/MyProjects/Tutorials/Slick2DGameTutorial/src/data/grass.png"/>
+ </tileset>
+ <tileset name="rocks" firstgid="10" tilewidth="35" tileheight="35">
+  <image source="../../../java/MyProjects/Tutorials/Slick2DGameTutorial/src/data/rocks.png"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Layer 1" width="10" height="10">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAABNiYGAQIhJzIGFOIGZFwhxY1CHrZSOgjgOqhg1qNrI6RizmcWBRh81efOqQ1XOSYB66OMx96OGBTT8hDADm6QjGkAEAAA==
+  </data>
+ </layer>
+ <layer name="Layer 1" width="10" height="10">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAAGNgGAWDCQAADA0iRpABAAA=
+  </data>
+ </layer>
+</map>

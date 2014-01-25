@@ -1,0 +1,60 @@
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(1, 'most_wanted', 'Most123', 'mohamed', 'james', 0097124564566, 00971501231233, 'negeria the capital the third street', 'a654254642686975', '234234', 'negeria');
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(2, 'black_rules', 'Black1', 'jeffry', 'necilton', 0097124564555, 00971501231222, 'usa new york something street neer the grocery', 'a959515157846325', '555555', 'USA');
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(3, 'stubidity', 'Im1officer', 'kantaliano', 'lee', 009718888888, 00971508888888, 'japan roma neer india gate', 'f222222222222222', '2222', 'china');
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(4, 'bagel', 'Indiano1', 'kreshnan', 'jahda', 0097124564111, 00971501231222, 'india banglore neer india gate', 'a654254642686999', '444', 'india');
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(5, 'money', 'Money222', 'belgates', 'father', 009718899999, 00971509988888, 'germany the capital the second street', 'a654254642686999', '233233', 'germany');
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(6, 'boring_work', 'Booring', 'mohamed', 'mohsen', 0097124488996, 00971507710077, 'uae ad khaleej street', 'a654254666666', '37000', 'UAE');
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(7, 'emp1', '0000', 'kreshnan', 'ahmed', 009715435434, 00971502323454, 'india bumbay', 'a555254642686975', '234', 'india');
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(8, 'emp2', '0000', 'fatema', 'jahda', 009713333333, 009716665554, 'india bumbay', 'a555254222686975', '334', 'india');
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(9, 'emp3', '0000', 'babangeda', 'moro', 0096626546545, 00966502323454, 'negeria somewhere inside it', 'a555566642686975', '444', 'negeria');
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(10, 'emp4', '0000', 'saeed', 'ali', 009712444444, 00971502222222, 'lebanon bairut', 'a445254642686975', '33333', 'lebanon');
+
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(11, 'emp5', '0000', 'lamia', 'naser', 0097124564565, 00971502345434, 'moroco', 'a446664642686975','12123', 'moroco');
+
+INSERT INTO sysuser
+(user_id, user_name, password, name, surname, phone_number, mobile_number, address, passport_number, p_o_box, nationality)
+VALUES
+(12, 'emp6', '0000', 'mariam', 'jasem', 0097121231232, 00971509999999, 'uae airport street', 'a111111111111111','1232', 'UAE');

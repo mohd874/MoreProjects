@@ -1,0 +1,6 @@
+testA:1:0
+testB:1:0
+testC:1:0
+testD:1:0
+testE:1:0
+BossA:1:1

@@ -1,0 +1,97 @@
+package ae.iemq.vims.web;
+
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.tapestry.services.DataSqueezer;
+import org.apache.tapestry.util.io.SqueezeAdaptor;
+
+import ae.iemq.vims.domain.BaseEntity;
+import ae.iemq.vims.service.IEntityRetrievalService;
+
+/**
+ * Squeezes a Set of persistent entities into a string format containg the entity types
+ * and ids which are later passed to the entity retrieval service for unsqueezing.  This
+ * results in a call to the JPA entityManager which should find the requested entity in the
+ * second level cache.  
+ *
+ */
+public class EntitySetSqueezeAdaptor implements SqueezeAdaptor {
+
+	private static final String NEW = "new";
+
+	private static final String PREFIX = "D";
+
+	private IEntityRetrievalService ers;
+
+	private static final Log logger = LogFactory
+			.getLog(EntitySetSqueezeAdaptor.class);
+
+	public void setEntityRetrievalService(IEntityRetrievalService ers) {
+		this.ers = ers;
+	}
+
+	public Class getDataClass() {
+		return Set.class;
+	}
+
+	public String getPrefix() {
+		return PREFIX;
+	}
+
+	public String squeeze(DataSqueezer arg0, Object data) {
+		
+		Set<? extends BaseEntity> entities = (Set<? extends BaseEntity>) data;
+		StringBuffer squeezedAll = new StringBuffer();
+
+		for (BaseEntity entity : entities) {
+			assert entity != null;
+			String name = entity.getClass().getCanonicalName();
+			String squeezed = PREFIX + name + "-";
+
+			if (entity.getId() == null)
+				squeezedAll.append(squeezed + NEW);
+			else
+				squeezedAll.append(squeezed + entity.getId());
+
+			squeezedAll.append(",");
+		}
+
+		System.out.println("Squeezed " + squeezedAll);
+		return squeezedAll.toString();
+	}
+
+	public Object unsqueeze(DataSqueezer dataSqueezer, String string) {
+
+		String[] entityStrings = string.split(",");
+		Set<BaseEntity> entities = new LinkedHashSet<BaseEntity>();
+
+		try {
+
+			for (String entityString : entityStrings) {
+
+				// Strip the prefix
+				entityString = entityString.substring(1);
+				String[] strings = entityString.split("\\-");
+
+				Class clazz = Class.forName(strings[0]);
+
+				if (strings[1].equals(NEW))
+					return clazz.newInstance();
+
+				Integer id = new Integer(strings[1]);
+				BaseEntity entity = ers.getEntityById(clazz, id);
+				entities.add(entity);
+			}
+			
+			System.out.println("Unsqueezed " + entities);
+			return entities;
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+}

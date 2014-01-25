@@ -1,0 +1,29 @@
+INSERT INTO customers
+(customer_id, title, fax, e_mail)
+VALUES
+(1, 'mr', 1434356, 'momo@hotmail.com');
+
+INSERT INTO customers
+(customer_id, title, fax, e_mail)
+VALUES
+(2, 'dr', 7710099, 'not_cool@hotmail.com');
+
+INSERT INTO customers
+(customer_id, title, fax, e_mail)
+VALUES
+(3, 'mss', 5435434, 'haha@yahoo.com');
+
+INSERT INTO customers
+(customer_id, title, fax, e_mail)
+VALUES
+(4, 'mr', 8787665, 'more@gmail.com');
+
+INSERT INTO customers
+(customer_id, title, fax, e_mail)
+VALUES
+(5, 'dr', 3453455, 'anything@hotmail.com');
+
+INSERT INTO customers
+(customer_id, title, fax, e_mail)
+VALUES
+(6, 'mr', 7776668, 'methods@hotmail.com');

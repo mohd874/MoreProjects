@@ -1,0 +1,32 @@
+/* 
+    Document   : site
+    Created on : Feb 20, 2008, 6:10:58 PM
+    Author     : Saeed
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+body{
+    font-family:Calibri;
+    font-size:1.1em;
+    background-color:#87CEFA
+}
+
+legend{
+    font-family:'Times New Roman';
+    font-size:1.6em;
+}
+
+a:link, a:visited{
+    color:#800000;
+    text-decoration:none;
+}
+
+a:hover{
+    color: #DC123C;
+}

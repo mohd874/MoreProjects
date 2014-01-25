@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/43/web/WEB-INF
+END
+struts-logic.tld
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/1/web/WEB-INF/struts-logic.tld
+END
+struts-tiles.tld
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/1/web/WEB-INF/struts-tiles.tld
+END
+struts-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/43/web/WEB-INF/struts-config.xml
+END
+struts-nested.tld
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/1/web/WEB-INF/struts-nested.tld
+END
+struts-html.tld
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/1/web/WEB-INF/struts-html.tld
+END
+struts-bean.tld
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/1/web/WEB-INF/struts-bean.tld
+END
+validation.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/1/web/WEB-INF/validation.xml
+END
+validator-rules.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/1/web/WEB-INF/validator-rules.xml
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/33/web/WEB-INF/web.xml
+END
+tiles-defs.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/roomschedulingsystem_roomschedulingsystem/!svn/ver/1/web/WEB-INF/tiles-defs.xml
+END

@@ -1,0 +1,84 @@
+.ndesign {
+}
+body{
+	margin-top:0PX;
+	scrollbar-face-color:#9a0202;
+	scrollbar-arrow-color:blue;
+	scrollbar-track-color:#b0c398;
+}
+
+#cssall{
+	background-image:url(../web_images/whitebg.gif);
+	width:770px;
+	height:850px;
+	background-repeat:no-repeat;
+	margin-left: 250px;
+}
+
+#nlocation{
+	width:297px;
+	height:100px;
+	left:733px;
+	position:absolute;
+}
+
+/*#menu1{
+	width:72px;
+	height:22px;
+	position:absolute;
+	top:182px;
+	left:698px;
+}*/
+
+#nwelcome{
+	/*background-color:#CCCCCC;*/
+	width:130px;
+	height:20px;
+	top:212px;
+	left:283px;
+	position:absolute;
+	font:bold;
+	text-transform:capitalize;
+	text-align:center;
+}
+
+#nclock{
+	width:100px;
+	height:100px;
+	top:600px;
+	left:298px;
+	position:absolute;
+}
+
+#ncenter{
+	width:560px;
+	height:520px;
+	top:220px;
+	left: 450px;
+  	position:absolute;
+	overflow:auto;
+}
+
+#nnavi{
+	width:155px;
+	height:250px;
+	top:270px;
+	left:267px;
+	position:absolute;
+}
+
+#center_pic{
+	width:200px;
+	height:200px;
+	left:310px;
+	top:20px;
+	position:absolute;
+}
+
+#line{
+	width:530px;
+	height:20px;
+	position:absolute;
+	top:290px;
+	background-image:url(../show_images/red.gif);
+}

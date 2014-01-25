@@ -1,0 +1,8 @@
+INSERT INTO `event_schedule` 
+VALUES (1,'2006-02-24','2006-03-1','Need Buffet',19000,'EWTE Will make a conference about new wireless technology from 28-02-2006 to 1-03-2006',3,3,4);
+INSERT INTO `event_schedule` 
+VALUES (2,'2006-04-14','2006-04-14','Please provide a DJ',13000,'Jeffry will make private party for relevants and friend only at the Royal Ball Room',2,6,1);
+INSERT INTO `event_schedule` 
+VALUES (3,'2006-03-30','2006-03-30','Contact La Mento Rest. to provide a business dinner',5900,'Kreshnan',4,5,5);
+INSERT INTO `event_schedule` 
+VALUES (4,'2006-06-15','2006-06-15','Provide buffet, lights and music',50000,'Mohamed James will make his wedding ceremony at the Parties Hall, Congratulations Mohamed and Happy marrieg',1,7,3);

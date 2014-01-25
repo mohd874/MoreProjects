@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Dojo Toolkit Test Page</title>    
+        
+        <!-- load the dojo toolkit base -->
+        <script type="text/javascript" src="js/dojo/dojo.js"
+                djConfig="parseOnLoad:true, isDebug:true"></script>
+        
+        <script type="text/javascript">
+            /* our JavaScript will go here */
+            // a very common method of loading code onLoad
+                        var init = function(){
+                            console.log("I run after the page is ready. See this in the console");	
+                        };
+                        dojo.addOnLoad(init);
+                        
+                        // and/or pass an anonymous function
+                        dojo.addOnLoad(function(){
+                            console.log("I also run, but second. "); 
+                        });
+                        
+                        dojo.require("dijit.form.Button");
+                        dojo.require("dijit.TitlePane");
+                        dojo.addOnLoad(function(){
+                            dojo.byId("testHeading").innerHTML = "We're on our way!";
+                            console.log("onLoad fires after require() is done"); 
+                        });  
+                        
+                        dojo.require("dojo.NodeList-fx");
+                        dojo.addOnLoad(function(){
+                            // our dom is ready, get the node:
+                            dojo.query("#testHeading")
+                            // add "testClass" to its class="" attribute
+                            .addClass("testClass")
+                            // and fade it out after 500 ms
+                            .fadeOut({ delay:500 }).play();
+                        });
+                        dojo.addOnLoad(function(){
+                            // get each element with class="para"
+                            dojo.query(".para")
+                            .addClass("testClass")
+                            .fadeOut({ delay: 1000 }).play();
+                        });
+                        dojo.addOnLoad(function(){
+                            dojo.query("#testHeading")
+                            .style("cursor","pointer")
+                            .connect("onclick",function(){
+                                this.innerHTML = "I've been clicked"; 
+                                dojo.query("#testHeading")
+                                .addClass("testClass")
+                                .fadeIn({ delay:0 }).play();             
+                            });	    
+                        });   
+                        var disableLinks = function(){
+                            dojo.query("a").connect("onclick",function(e){
+                                e.preventDefault(); // stop the event
+                                console.log('clicked: ',e.target); // the node we clicked on
+                            });	
+                        };
+                        dojo.addOnLoad(disableLinks);
+                        
+                        dojo.addOnLoad(function(){ 
+                            var animArgs = {
+                                node: "testHeading",
+                                duration: 1000, // ms to run animation
+                                delay: 250 // ms to stall before playing
+                            };
+                            dojo.fadeOut(animArgs).play();
+                        });
+                        
+                        dojo.addOnLoad(function(){
+                            dojo.style("testHeading","opacity","0"); // hide it 
+                            var anim1 = dojo.fadeIn({ node: "testHeading", duration:700 });
+                            var anim2 = dojo.animateProperty({
+                                node: "testHeading", delay: 1000,
+                                properties:{
+                                    // fade back in and make text bigger
+                                    opacity: { end: 1 }, fontSize: { end:19, unit:"pt"}
+                                }
+                            }); 
+                            anim1.play();
+                            anim2.play();	
+                        });
+                        dojo.require("dojo.fx");
+                        dojo.addOnLoad(function(){
+                            // slide the node to 75,75
+                            dojo.fx.slideTo({
+                                node:"testHeading",
+                                top:75, left:75
+                            }).play(); // and play it
+                        });	
+            var init = function(){
+                var contentNode = dojo.byId("content");
+                dojo.xhrGet({
+                    url: "sampleFile.txt",
+                    handleAs: "text",
+                    load: function(data,args){
+                        // fade out the node we're modifying
+                        dojo.fadeOut({
+                            node: contentNode,
+                            onEnd: function(){
+                                // set the data, fade it back in
+                                contentNode.innerHTML = data; 
+                                dojo.fadeIn({node: contentNode}).play();    
+                            }
+                        }).play();
+                    },
+                    // if any error occurs, it goes here:
+                    error: function(error,args){
+                        console.warn("error!",error);
+                    }
+                });
+            }; 
+            dojo.addOnLoad(init);
+        </script>
+        
+        <style type="text/css">
+            /* our CSS can go here */    
+            .testClass {
+                background-color:red;
+            } 
+            #container {
+                border:1px dotted #b7b7b7;
+                background:#ededed;
+                width:75px;
+                height:55px;
+            }
+        </style>    
+    </head>
+    <body><!-- this is a Typical WebPage starting point ... -->
+        <h1 id="testHeading">Dojo Skeleton Page</h1>
+        
+        <a class="link" href="#">First link</a>
+        <a class="link" href="#">Second Link</a>    
+        
+        <p class="para">First paragraph</p>
+        <p class="para">Second paragraph</p>
+        <p class="para">Third paragraph</p>
+        <br />
+        <br />
+        <div id="container" class="box">
+            <div id="content">
+                I am some Inner Content.
+                I am going to be replaced
+            </div>
+        </div>        
+    </body>
+</html>

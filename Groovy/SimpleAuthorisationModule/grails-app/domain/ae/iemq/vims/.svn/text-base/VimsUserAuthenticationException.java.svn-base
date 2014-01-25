@@ -1,0 +1,11 @@
+package ae.iemq.vims;
+
+import org.acegisecurity.BadCredentialsException;
+
+public class VimsUserAuthenticationException extends BadCredentialsException {
+
+	public VimsUserAuthenticationException(String msg) {
+		super(msg);
+	}
+
+}

@@ -1,0 +1,11 @@
+YouWillNotCatchMe:99999999:1
+ThisGameIsEasy:10000:2
+LoLz:5000:3
+Dead_Moggle:2500:3
+Idiot:1250:4
+This_Game_Is_Stupid:625:5
+Really!:100:6
+Haha:100:7
+Mochi:100:8
+Word_Killer:100:9
+Why_I_Am_The_Last_One:100:10

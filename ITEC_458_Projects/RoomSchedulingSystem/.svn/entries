@@ -1,0 +1,61 @@
+8
+
+dir
+53
+http://roomschedulingsystem.unfuddle.com/svn/roomschedulingsystem_roomschedulingsystem
+http://roomschedulingsystem.unfuddle.com/svn/roomschedulingsystem_roomschedulingsystem
+
+
+
+2008-06-09T20:18:54.944239Z
+53
+roomschedulingsystem_mohd874
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+8edcea98-f2e8-40a8-927c-98a7f90fc635
+
+test
+dir
+
+Project Plan
+dir
+
+Information
+dir
+
+Power Point
+dir
+
+src
+dir
+
+Reporting
+dir
+
+web
+dir
+
+build.xml
+file
+
+
+
+
+2008-06-08T10:05:10.983849Z
+6e49f9ba8650d42103be4640d4dcc058
+2008-04-15T06:31:58.830207Z
+1
+roomschedulingsystem_mohd874
+

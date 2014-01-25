@@ -1,0 +1,15 @@
+package ae.iemq.vims;
+
+import java.util.Map;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+public class ViMSListener implements HttpSessionListener {
+	public void sessionCreated(HttpSessionEvent arg0) {
+	}
+
+	public void sessionDestroyed(HttpSessionEvent event) {
+		Map sessionMap = (Map) event.getSession().getServletContext().getAttribute("");
+		sessionMap.remove("");
+	}
+}

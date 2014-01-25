@@ -1,0 +1,7 @@
+System|232|Pentium 4 - GHz, 512 MB, 300 GB |1999
+System|238|AMD Opteron - 4 GHz, 1 GB, 300GB |1099
+Software|872|Tomcat 4 Server for Windows |99.99
+Software|872|Tomcat 4 Server for Linux |109.99
+Books|511|Beginning JavaServer Pages |39.99
+Books|188|Professional Apache Tomcat 5|49.99
+Books|148|Apache Tomcat Bible|49.99

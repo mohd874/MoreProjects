@@ -1,0 +1,6 @@
+INSERT INTO `events` VALUES (1,'Private Party','A party with limited number of people','10000');
+INSERT INTO `events` VALUES (2,'Public Party','A party with no limited number of people','30000');
+INSERT INTO `events` VALUES (3,'Wedding','A marrige ceremony','40000');
+INSERT INTO `events` VALUES (4,'Conferens','','15000');
+INSERT INTO `events` VALUES (5,'Private Meeting','closed meeting with no media','5000');
+INSERT INTO `events` VALUES (6,'Public Meeting','a meeting with media','9000');

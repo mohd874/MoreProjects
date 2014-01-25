@@ -1,0 +1,86 @@
+/* CSS Document */
+
+body {
+margin: 0PX;
+
+}
+
+#left_up{
+	width: 200px;
+	height: 100px;
+	position: absolute;
+	border: 0px solid #0FB5EC;
+	margin: 0PX;
+	background-image:url(../web_images/left_upper.gif);
+	left: 0px;
+	top: 0px;
+}
+
+
+#center_up{
+	width: 600px;
+	height: 100px;
+	position: absolute;
+	left: 201px;
+	border: 0px solid #0FB5EC;
+	margin: 0PX;
+	background-image:url(../web_images/upper.gif);
+	left: 200px;
+	top: 0px;
+}
+
+
+/*#right_up{
+	width: 600px;
+	height: 75px;
+	position: absolute;
+	left: 0px;
+	border: 0px solid #0FB5EC;
+	background-image: url(banner.JPG);
+	margin: 0PX;
+}*/
+
+#left_mid{
+	width: 200px;
+	height: 500px;
+	position: absolute;
+	top: 100px;
+	border: 0px solid #0FB5EC;
+	margin: 0PX;
+	left: 0px;
+	background-image: url(../web_images/upper_n_left.gif);
+}
+
+
+#center_mid{
+	width: 570px;
+	height: 470px;
+	position: absolute;
+	top: 100px;
+	left: 200px;
+	border: 0px solid #0FB5EC;
+	margin: 0PX;
+	background-image: url(../web_images/center.gif);
+	padding: 15px;
+	overflow: auto;
+}
+
+/*#right_mid{
+	width: 180px;
+	height: 255px;
+	position: absolute;
+	top: 75px;
+	left: 420px;
+	border: 0px solid #0FB5EC;
+	margin: 0PX;
+}
+
+#bottom{
+	width: 600px;
+	height: 30px;
+	position: absolute;
+	top: 330px;
+	border: 0px solid #0FB5EC;
+	margin: 0PX;
+}
+*/

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+<session-factory>
+<!--  postgresql configuration 
+	<property name="connection.url">jdbc:postgresql://localhost/libraryweb</property>
+	<property name="connection.username">postgres</property>
+	<property name="connection.password">p</property>
+	<property name="connection.driver_class">org.postgresql.Driver</property>
+	<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>-->
+	
+<!--  mysql configuration -->
+	<property name="connection.url">jdbc:mysql://localhost/attendeesdb</property>
+	<property name="connection.username">root</property>
+	<property name="connection.password">123</property>
+	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+	
+	<mapping resource="de/laliluna/library/Book.hbm.xml" />
+	<mapping resource="de/laliluna/library/Customer.hbm.xml" />
+</session-factory>
+</hibernate-configuration>

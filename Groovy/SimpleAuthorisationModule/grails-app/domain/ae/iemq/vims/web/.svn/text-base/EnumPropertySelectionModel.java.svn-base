@@ -1,0 +1,74 @@
+package ae.iemq.vims.web;
+
+import java.lang.reflect.Method;
+
+import org.apache.log4j.Logger;
+import org.apache.tapestry.form.IPropertySelectionModel;
+
+import ae.iemq.vims.util.StringUtil;
+
+/**
+ * A property selection model the values of which are read from an enum
+ *
+ */
+public class EnumPropertySelectionModel implements IPropertySelectionModel {
+	
+	static Logger LOG = Logger.getLogger(EnumPropertySelectionModel.class);
+	
+	public EnumPropertySelectionModel(Enum en) {
+		clazz = en.getClass();
+		try {
+			Method m = en.getClass().getMethod("values", new Class[0]);
+			Object ret = m.invoke(null, new Object[0]);
+			values = (Enum[]) ret;
+		} catch (RuntimeException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+//	public EnumPropertySelectionModel getOrdinalSelectionModel(){
+//		Enum[] ret = values;
+//		for(int i=0;i<ret.length;i++){
+//			values[i]=ret[i].ordinal();
+//		}
+//		return null;
+//	}
+	
+	public int getOptionCount() {
+		return values.length;
+	}
+
+	public Object getOption(int index) {
+		return values[index];
+	}
+
+	public String getLabel(int index) {
+		return values[index].name();
+	}
+
+	public String getValue(int index) {
+		return values[index].toString();
+	}
+
+	public Object translateValue(String value) {
+		Object obj = null;
+		LOG.debug("value to translate -->" + value);
+		if (StringUtil.trimToNull(value) == null) {
+			LOG.error("translateValue enum value doesn't exist");
+		} else {
+			obj = Enum.valueOf(clazz, value);
+		}
+		
+		return obj;
+	}
+
+	private Enum[] values;
+
+	private Class<? extends Enum> clazz;
+
+	public boolean isDisabled(int index) {
+		return false;
+	}
+}
